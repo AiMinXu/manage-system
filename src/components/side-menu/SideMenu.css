@@ -1,0 +1,20 @@
+.container {
+  height: 100%;
+  display: felx;
+  flex-direction: column;
+  overflow: auto;
+  width: 15rem
+}
+
+.container .logo {
+  color: #fff;
+  font-size: 18px;
+  line-height: 32px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px;
+  text-align: center;
+}
+
+.container .menubox {
+  flex: 1;
+}

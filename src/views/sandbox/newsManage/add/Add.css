@@ -1,0 +1,29 @@
+.site-page-header {
+  border: 1px solid rgb(235, 237, 240);
+}
+
+.steps {
+  padding: 0 24px;
+  margin-top: 20px;
+}
+
+.btnGroup {
+  margin-top: 2rem;
+  display: flex;
+  width: 30rem;
+  padding: 0 24px;
+}
+
+.formGroup {
+  padding: 0 24px;
+  margin-top: 2rem;
+}
+
+
+.btnGroup .btn {
+  margin-right: .5rem;
+}
+
+.hidden {
+  display: none;
+}
