@@ -26,7 +26,7 @@ const UserList = () => {
       "3": "editor"
     }
     //?_expand=role拼接上role字段显示用于显示角色名称
-    axios.get("http://localhost:5050/users?_expand=role").then(res => {
+    axios.get("users?_expand=role").then(res => {
       const data = res.data
       //进行判断，若roleId等于1则渲染全部数据，若不等于则渲染等于自己username和有相同区域region的且roleId为editor的
       setDataSource(roleObj[roleId] === "superAdmin" ? data : [
@@ -37,13 +37,13 @@ const UserList = () => {
     })
   }, [roleId, region, uesrname])
   useEffect(() => {
-    axios.get("http://localhost:5050/regions").then(res => {
+    axios.get("regions").then(res => {
       const data = res.data
       setRegionList(data)
     })
   }, [])
   useEffect(() => {
-    axios.get("http://localhost:5050/roles").then(res => {
+    axios.get("roles").then(res => {
       const data = res.data
       setRoleList(data)
     })
@@ -66,7 +66,7 @@ const UserList = () => {
   //删除操作 前端页面删除+后端数据删除（一二级菜单筛选通过grade）
   const deleteHandle = (item) => {
     setDataSource(dataSource.filter(data => item.id !== data.id))
-    axios.delete(`http://localhost:5050/users/${item.id}`)
+    axios.delete(`users/${item.id}`)
   }
   const updateHandle = (item) => {
     //操作xu要放在异步操作中，让两者都生效，react中dom更行不一定是同步的
@@ -87,7 +87,7 @@ const UserList = () => {
     // console.log(item);
     item.roleState = !item.roleState
     setDataSource([...dataSource])
-    axios.patch(`http://localhost:5050/users/${item.id}`, {
+    axios.patch(`users/${item.id}`, {
       roleState: item.roleState
     })
   }
@@ -97,7 +97,7 @@ const UserList = () => {
       value => {
         // console.log(value)
         //设置dataSource前需要post到后端生成id，方便后面删除和更新
-        axios.post(`http://localhost:5050/users`, {
+        axios.post(`users`, {
           ...value,
           "roleState": true,
           "default": false,
@@ -133,7 +133,7 @@ const UserList = () => {
           return item //其他对象不改变
         }))
 
-        axios.patch(`http://localhost:5050/users/${current.id}`, value)//当前编辑更新对象的id不是item.id，发送patch补丁请求
+        axios.patch(`users/${current.id}`, value)//当前编辑更新对象的id不是item.id，发送patch补丁请求
       }
     ).catch(err => console.log(err))
   }
