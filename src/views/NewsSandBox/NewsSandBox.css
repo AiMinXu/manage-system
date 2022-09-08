@@ -1,0 +1,12 @@
+.site-layout .site-layout-background {
+  background: #fff;
+  margin: 24px 16px;
+  padding: 24px;
+  min-Height: 280;
+  overflow: auto;
+}
+
+#root,
+.ant-layout {
+  height: 100%;
+}
