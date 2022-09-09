@@ -7,13 +7,14 @@ import './Add.css'
 const { Step } = Steps;
 const { Option } = Select;
 const Add = () => {
-  const [current, setCurrent] = useState(0)
-  const [formInfo, setFormInfo] = useState({})
-  const [options, setOptions] = useState([])
-  const [content, setContent] = useState('')
-  const firstFromRef = useRef(null)
+  const [current, setCurrent] = useState(0)//记录当前到哪一步
+  const [formInfo, setFormInfo] = useState({})//暂存表单状态state
+  const [options, setOptions] = useState([])//选项
+  const [content, setContent] = useState('')//富文本内容
+  const firstFromRef = useRef(null)//表单ref
   const history = useHistory()
   const user = JSON.parse(localStorage.getItem("token"))
+
   useEffect(() => {
     axios.get("categories").then(res => {
       setOptions(res.data)
@@ -25,12 +26,12 @@ const Add = () => {
   }
   const nextHandle = () => {
     if (current === 0) {
-      firstFromRef.current.validateFields().then(res => {
+      firstFromRef.current.validateFields().then(res => {//验证表单是否为空
         setFormInfo(res)//暂存表单数据
         setCurrent(current + 1)
       })
     } else if (current === 1) {
-      if (content === '' || content.trim() === "<p></p>") {
+      if (content === '' || content.trim() === "<p></p>") {//判断富文本的内容是否为空
         message.error({
           content: "请确认您的输入"
         })
@@ -58,7 +59,7 @@ const Add = () => {
         message: "通知",
         description: `请在${auditState === 0 ? "草稿箱" : "审核管理"}中查看`
       })
-      history.push(auditState === 0 ? "news-manage/draft" : "audit-manage/list")
+      history.push(auditState === 0 ? "/news-manage/draft" : "/audit-manage/list")
     })
   }
   return (

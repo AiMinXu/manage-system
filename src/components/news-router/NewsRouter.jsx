@@ -14,7 +14,7 @@ import Audit from '../../views/NewsSandBox/AuditManage/Audit/Audit';
 import AuditList from '../../views/NewsSandBox/AuditManage/AuditList/AuditList';
 import Add from '../../views/NewsSandBox/NewsManage/Add/Add';
 import Update from '../../views/NewsSandBox/NewsManage/Update/Update';
-import Perview from '../../views/NewsSandBox/NewsManage/Preview/Perview';
+import Preview from '../../views/NewsSandBox/NewsManage/Preview/Preview';
 import Draft from '../../views/NewsSandBox/NewsManage/Draft/Draft';
 import Category from '../../views/NewsSandBox/NewsManage/Category/Category';
 
@@ -32,8 +32,8 @@ const localRouteMap = {
   "/audit-manage/list": AuditList,
   "/news-manage/add": Add,
   "/news-manage/draft": Draft,
-  "/news-manage/preview": Perview,
-  "/news-manage/update": Update,
+  "/news-manage/preview/:id": Preview,
+  "/news-manage/update/:id": Update,
   "/news-manage/category": Category,
 }
 
@@ -52,7 +52,7 @@ const NewsRouter = () => {
   }, [])
   //判断有无路由权限
   const routeRights = (item) => {
-    return localRouteMap[item.key] && (item.pagepermission || item.routepermission)
+    return localRouteMap[item.key] && (item.pagepermission || item.routepermisson)
   }
   const { role: { rights } } = JSON.parse(localStorage.getItem("token"))
   const checkPermisson = (item) => {
